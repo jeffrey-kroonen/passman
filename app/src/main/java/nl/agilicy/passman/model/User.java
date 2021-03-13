@@ -1,11 +1,18 @@
 package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
     private String first_name;
 
@@ -25,11 +32,35 @@ public class User {
 
     private Timestamp updated_at;
 
-    public UUID getId() {
+    public User(String first_name, String last_name, String email, String password, boolean is_active,
+            boolean is_verified) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.is_active = is_active;
+        this.is_verified = is_verified;
+    }
+
+    public User(Long id, String first_name, String last_name, String email, String password, boolean is_active,
+            boolean is_verified, Timestamp last_login_at, Timestamp created_at, Timestamp updated_at) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.is_active = is_active;
+        this.is_verified = is_verified;
+        this.last_login_at = last_login_at;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -105,5 +136,4 @@ public class User {
         this.updated_at = updated_at;
     }
 
-    
 }

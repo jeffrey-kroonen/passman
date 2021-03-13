@@ -36,7 +36,7 @@ public class PasswordEntryController {
     }
 
     @GetMapping(path = "{id}")
-    public PasswordEntry getPasswordEntry(@PathVariable("id") UUID id, @PathVariable("directoryId") UUID directoryId) {
+    public PasswordEntry getPasswordEntryById(@PathVariable("id") UUID id, @PathVariable("directoryId") UUID directoryId) {
         return this.passwordEntryService.getPasswordEntryById(id, directoryId).orElse(null);
     }
 

@@ -2,7 +2,6 @@ package nl.agilicy.passman.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,15 +28,15 @@ public class UserService {
         return this.userDao.getUsers();
     }
 
-    public Optional<User> getUserById(UUID id) {
+    public Optional<User> getUserById(Long id) {
         return this.userDao.getUserById(id);
     }
 
-    public boolean updateUser(UUID id, User user) {
+    public boolean updateUser(Long id, User user) {
         return this.userDao.updateUser(id, user);
     }
 
-    public boolean deleteUser(UUID id) {
+    public boolean deleteUser(Long id) {
         return this.userDao.deleteUser(id);
     }
 }
