@@ -15,6 +15,8 @@ public interface PasswordEntryDao {
 
     List<PasswordEntry> getPasswordEntries(UUID directoryId);
 
+    Optional<PasswordEntry> getPasswordEntryById(UUID id);
+
     Optional<PasswordEntry> getPasswordEntryById(UUID id, UUID directoryId);
 
     boolean updatePasswordEntry(UUID id, PasswordEntry passwordEntry, UUID directoryId);

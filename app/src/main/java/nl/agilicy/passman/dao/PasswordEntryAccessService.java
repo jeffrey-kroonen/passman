@@ -30,6 +30,11 @@ public class PasswordEntryAccessService implements PasswordEntryDao {
     }
 
     @Override
+    public Optional<PasswordEntry> getPasswordEntryById(UUID id) {
+        return DB.stream().filter(passwordEntry -> passwordEntry.getId().equals(id)).findFirst();
+    }
+
+    @Override
     public Optional<PasswordEntry> getPasswordEntryById(UUID id, UUID directoryId) {
         // Todo: Fetch Directory by ID and return null when no Directory is found.
 
