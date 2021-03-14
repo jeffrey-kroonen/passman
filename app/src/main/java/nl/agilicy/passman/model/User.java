@@ -1,35 +1,53 @@
 package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
 public class User {
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
+    @Column(nullable = false)
     private String first_name;
 
+    @Column(nullable = false)
     private String last_name;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private boolean is_active;
+    private boolean is_active = false;
 
-    private boolean is_verified;
+    private boolean is_verified = false;
 
     private Timestamp last_login_at;
 
+    @CreationTimestamp
     private Timestamp created_at;
 
+    @UpdateTimestamp
     private Timestamp updated_at;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -105,5 +123,4 @@ public class User {
         this.updated_at = updated_at;
     }
 
-    
 }

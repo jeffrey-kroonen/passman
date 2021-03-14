@@ -1,6 +1,8 @@
 package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
 
 public class Permission {
     enum PermissionType {
@@ -69,5 +71,10 @@ public class Permission {
         this.updated_at = updated_at;
     }
 
-    
+    /** 
+     * Get PermissionTypes as List.
+     */ 
+    public List<PermissionType> getPermissionTypes() {
+        return Arrays.asList(PermissionType.values());
+    }
 }

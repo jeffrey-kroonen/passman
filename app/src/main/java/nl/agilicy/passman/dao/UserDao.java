@@ -2,12 +2,11 @@ package nl.agilicy.passman.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import nl.agilicy.passman.model.User;
 
 /**
- * UserDataAccessService
+ * UserDao
  */
 public interface UserDao {
 
@@ -15,9 +14,9 @@ public interface UserDao {
     
     List<User> getUsers();
 
-    Optional<User> getUserById(UUID id);
+    Optional<User> getUserById(Long id);
 
-    boolean updateUser(UUID id, User user);
+    boolean updateUser(Long id, User user);
 
-    boolean deleteUser(UUID id);
+    boolean deleteUser(Long id);
 }
