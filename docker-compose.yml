@@ -12,8 +12,10 @@ services:
       MYSQL_DATABASE: passman
       MYSQL_USER: passman_user
       MYSQL_PASSWORD: passman_password
+    ports:
+      - '3306:3306'
     volumes: 
-    - ./docker/mysql/db-data:/var/lib/mysql
+      - ./docker/mysql/db-data:/var/lib/mysql
 
   adminer:
     image: adminer

@@ -2,10 +2,15 @@ package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class User {
@@ -14,47 +19,29 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String first_name;
 
+    @Column(nullable = false)
     private String last_name;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private boolean is_active;
+    private boolean is_active = false;
 
-    private boolean is_verified;
+    private boolean is_verified = false;
 
     private Timestamp last_login_at;
 
+    @CreationTimestamp
     private Timestamp created_at;
 
+    @UpdateTimestamp
     private Timestamp updated_at;
-
-    public User(String first_name, String last_name, String email, String password, boolean is_active,
-            boolean is_verified) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.password = password;
-        this.is_active = is_active;
-        this.is_verified = is_verified;
-    }
-
-    public User(Long id, String first_name, String last_name, String email, String password, boolean is_active,
-            boolean is_verified, Timestamp last_login_at, Timestamp created_at, Timestamp updated_at) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.password = password;
-        this.is_active = is_active;
-        this.is_verified = is_verified;
-        this.last_login_at = last_login_at;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
 
     public Long getId() {
         return id;
