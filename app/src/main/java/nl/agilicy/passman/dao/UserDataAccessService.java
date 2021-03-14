@@ -3,7 +3,6 @@ package nl.agilicy.passman.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
@@ -29,12 +28,12 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public Optional<User> getUserById(UUID id) {
+    public Optional<User> getUserById(Long id) {
         return DB.stream().filter(user -> user.getId().equals(id)).findFirst();
     }
 
     @Override
-    public boolean updateUser(UUID id, User userToUpdate) {
+    public boolean updateUser(Long id, User userToUpdate) {
         return getUserById(id)
             .map(user -> {
                 int indexOfUserToUpdate = DB.indexOf(user);
@@ -47,7 +46,7 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public boolean deleteUser(UUID id) {
+    public boolean deleteUser(Long id) {
         Optional<User> user = getUserById(id);
 
         if (!user.isEmpty()) {

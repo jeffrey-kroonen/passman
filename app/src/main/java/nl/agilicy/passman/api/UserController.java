@@ -1,7 +1,6 @@
 package nl.agilicy.passman.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,17 +37,17 @@ public class UserController {
     }
 
     @GetMapping(path = "{id}")
-    public User getUserById(@PathVariable("id") UUID id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return this.userService.getUserById(id).orElse(null);
     }
 
     @PutMapping(path = "{id}")
-    public void updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
+    public void updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         this.userService.updateUser(id, user);
     }
 
     @DeleteMapping(path = "{id}")
-    public void deleteUser(@PathVariable("id") UUID id) {
+    public void deleteUser(@PathVariable("id") Long id) {
         this.userService.deleteUser(id);
     }
 
