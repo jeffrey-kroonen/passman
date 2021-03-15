@@ -20,7 +20,7 @@ Content-Type: "application/json"
 `GET` http://localhost:8080/api/v1/user/{id}<br>
 
 ### Parameters<br>
-- `id` _example 1_
+- id _example 1_
 
 ### Headers
 ```json
@@ -38,7 +38,7 @@ Content-Type: "application/json"
 ### Body
 ```json
 {
-    "first_name": "Alexander ",
+    "first_name": "Alexander",
     "last_name": "McQueen",
     "email": "a.mcqueen@example.com",
     "password": "super_secret"
@@ -49,7 +49,7 @@ Content-Type: "application/json"
 `PUT` http://localhost:8080/api/v1/user/{id}<br>
 
 ### Parameters<br>
-- `id` _example 1_
+- id _example 1_
 
 ### Headers
 ```json
@@ -59,7 +59,7 @@ Content-Type: "application/json"
 ### Body
 ```json
 {
-    "first_name": "Alexander ",
+    "first_name": "Alexander",
     "last_name": "McQueen",
     "email": "a.mcqueen@example.com"
 }
@@ -69,7 +69,7 @@ Content-Type: "application/json"
 `DELETE` http://localhost:8080/api/v1/user/{id}<br>
 
 ### Parameters<br>
-- `id` _example 1_
+- id _example 1_
 
 ### Headers
 ```json
