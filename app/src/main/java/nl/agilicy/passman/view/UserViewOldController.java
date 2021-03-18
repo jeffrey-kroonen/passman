@@ -14,12 +14,12 @@ import nl.agilicy.passman.service.UserService;
 
 @RequestMapping("user")
 @Controller
-public class UserViewController {
+public class UserViewOldController {
 
     private final UserService userService;
 
     @Autowired
-    public UserViewController(UserService userService) {
+    public UserViewOldController(UserService userService) {
         this.userService = userService;
     }
 
