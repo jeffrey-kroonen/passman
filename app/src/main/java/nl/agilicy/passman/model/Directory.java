@@ -1,9 +1,9 @@
 package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,10 +11,11 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@Entity
 public class Directory {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -27,11 +28,11 @@ public class Directory {
     @UpdateTimestamp
     private Timestamp update_at;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

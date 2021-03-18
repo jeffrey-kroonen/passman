@@ -1,7 +1,6 @@
 package nl.agilicy.passman.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,17 +37,17 @@ public class DirectoryController {
     }
 
     @GetMapping(path = "{id}")
-    public Directory getDirectoryById(@PathVariable("id") UUID id) {
+    public Directory getDirectoryById(@PathVariable("id") Long id) {
         return this.directoryService.getDirectoryById(id).orElse(null);
     }
 
     @PutMapping(path = "{id}")
-    public void updateDirectory(@PathVariable("id") UUID id, @RequestBody Directory directory) {
+    public void updateDirectory(@PathVariable("id") Long id, @RequestBody Directory directory) {
         this.directoryService.updateDirectory(id, directory);
     }
 
     @DeleteMapping(path = "{id}")
-    public void deleteDirectory(@PathVariable("id") UUID id) {
+    public void deleteDirectory(@PathVariable("id") Long id) {
         this.directoryService.deleteDirectory(id);
     }
 
