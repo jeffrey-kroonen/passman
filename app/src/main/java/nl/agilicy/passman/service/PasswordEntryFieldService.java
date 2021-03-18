@@ -1,43 +1,78 @@
 package nl.agilicy.passman.service;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import nl.agilicy.passman.dao.PasswordEntryFieldDao;
+import nl.agilicy.passman.model.PasswordEntry;
 import nl.agilicy.passman.model.PasswordEntryField;
+import nl.agilicy.passman.repository.PasswordEntryFieldRepository;
+import nl.agilicy.passman.repository.PasswordEntryRepository;
 
 @Service
 public class PasswordEntryFieldService {
     
-    private final PasswordEntryFieldDao passwordEntryFieldDao;
+    private final PasswordEntryFieldRepository passwordEntryFieldRepository;
+
+    private final PasswordEntryRepository passwordEntryRepository;
 
     @Autowired
-    public PasswordEntryFieldService(@Qualifier("testPasswordEntryFieldDao") PasswordEntryFieldDao passwordEntryFieldDao) {
-        this.passwordEntryFieldDao = passwordEntryFieldDao;
+    public PasswordEntryFieldService(PasswordEntryFieldRepository passwordEntryFieldRepository, PasswordEntryRepository passwordEntryRepository) {
+        this.passwordEntryFieldRepository = passwordEntryFieldRepository;
+        this.passwordEntryRepository = passwordEntryRepository;
     }
 
-    public boolean createPasswordEntryField(PasswordEntryField passwordEntryField, UUID passwordEntryId) {
-        return this.passwordEntryFieldDao.createPasswordEntryField(passwordEntryField, passwordEntryId);
+    public boolean createPasswordEntryField(PasswordEntryField passwordEntryField, Long passwordEntryId) {
+        PasswordEntry passwordEntry = this.passwordEntryRepository.findById(passwordEntryId).orElse(null);
+
+        if (Objects.isNull(passwordEntry)) {
+            return false;
+        }
+
+        passwordEntryField.setPassword_entry(passwordEntry);
+
+        this.passwordEntryFieldRepository.save(passwordEntryField);
+        return true;
     }
 
-    public List<PasswordEntryField> getPasswordEntryFields(UUID passwordEntryId) {
-        return this.passwordEntryFieldDao.getPasswordEntryFields(passwordEntryId);
+    public Set<PasswordEntryField> getPasswordEntryFields(Long passwordEntryId) {
+        PasswordEntry passwordEntry = this.passwordEntryRepository.findById(passwordEntryId).orElse(null);
+
+        if (Objects.isNull(passwordEntry)) {
+            return null;
+        }
+
+        return passwordEntry.getPassword_entity_fields();
     }
 
-    public Optional<PasswordEntryField> getPasswordEntryFieldById(UUID id, UUID passwordEntryId) {
-        return this.passwordEntryFieldDao.getPasswordEntryFieldById(id, passwordEntryId);
+    public Optional<PasswordEntryField> getPasswordEntryFieldById(Long id) {
+        return this.passwordEntryFieldRepository.findById(id);
     }
 
-    public boolean updatePasswordEntryField(UUID id, PasswordEntryField passwordEntryField, UUID passwordEntryId) {
-        return this.passwordEntryFieldDao.updatePasswordEntryField(id, passwordEntryField, passwordEntryId);
+    public boolean updatePasswordEntryField(Long id, PasswordEntryField passwordEntryFieldToUpdate) {
+        PasswordEntryField passwordEntryField = this.passwordEntryFieldRepository.findById(id).orElse(null);
+
+        if (Objects.isNull(passwordEntryField)) {
+            return false;
+        }
+
+        passwordEntryField.setValue(passwordEntryFieldToUpdate.getValue());
+
+        this.passwordEntryFieldRepository.save(passwordEntryFieldToUpdate);
+        return true;
     }
 
-    public boolean deletePasswordEntryField(UUID id, UUID passwordEntryId) {
-        return this.passwordEntryFieldDao.deletePasswordEntryField(id, passwordEntryId);
+    public boolean deletePasswordEntryField(Long id) {
+        PasswordEntryField passwordEntryField = this.passwordEntryFieldRepository.findById(id).orElse(null);
+
+        if (Objects.isNull(passwordEntryField)) {
+            return false;
+        }
+
+        this.passwordEntryFieldRepository.delete(passwordEntryField);
+        return true;
     }
 }
