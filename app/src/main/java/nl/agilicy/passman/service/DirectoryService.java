@@ -1,43 +1,59 @@
 package nl.agilicy.passman.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import nl.agilicy.passman.dao.DirectoryDao;
+import nl.agilicy.passman.repository.DirectoryRepository;
 import nl.agilicy.passman.model.Directory;
 
 @Service
 public class DirectoryService {
     
-    private final DirectoryDao directoryDao;
+    private final DirectoryRepository directoryRepository;
 
     @Autowired
-    public DirectoryService(@Qualifier("testDirectoryDao") DirectoryDao directoryDao) {
-        this.directoryDao = directoryDao;
+    public DirectoryService(DirectoryRepository directoryRepository) {
+        this.directoryRepository = directoryRepository;
     }
 
-    public boolean createDirectory(Directory directory) {
-        return this.directoryDao.createDirectory(directory);
+    public void createDirectory(Directory directory) {
+        this.directoryRepository.save(directory);
     }
 
     public List<Directory> getDirectories() {
-        return this.directoryDao.getDirectories();
+        return this.directoryRepository.findAll();
     }
 
-    public Optional<Directory> getDirectoryById(UUID id) {
-        return this.directoryDao.getDirectoryById(id);
+    public Optional<Directory> getDirectoryById(Long id) {
+        return this.directoryRepository.findById(id);
     }
 
-    public boolean updateDirectory(UUID id, Directory directory) {
-        return this.directoryDao.updateDirectory(id, directory);
+    public boolean updateDirectory(Long id, Directory directoryToUpdate) {
+        Directory directory = this.getDirectoryById(id).orElse(null);
+
+        if (Objects.isNull(directory)) {
+            return false;
+        }
+
+        directory.setName(directoryToUpdate.getName());
+        directory.setIs_active(directoryToUpdate.isIs_active());
+
+        this.directoryRepository.save(directory);
+        return true;
     }
 
-    public boolean deleteDirectory(UUID id) {
-        return this.directoryDao.deleteDirectory(id);
+    public boolean deleteDirectory(Long id) {
+        Directory directory = this.getDirectoryById(id).orElse(null);
+
+        if (Objects.isNull(directory)) {
+            return false;
+        }
+
+        this.directoryRepository.delete(directory);
+        return true;
     }
 }
