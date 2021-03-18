@@ -3,23 +3,42 @@ package nl.agilicy.passman.model;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
 public class PasswordEntry {
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private Directory directory;
-
+    @Column(nullable = false)
     private String title;
 
+    @CreationTimestamp
     private Timestamp created_at;
 
+    @UpdateTimestamp
     private Timestamp updated_at;
 
-    public UUID getId() {
+    @ManyToOne
+    @JoinColumn(name = "directory_id", nullable = false)
+    private Directory directory;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

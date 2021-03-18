@@ -1,6 +1,7 @@
 package nl.agilicy.passman.api;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.agilicy.passman.model.Directory;
+import nl.agilicy.passman.model.PasswordEntry;
 import nl.agilicy.passman.service.DirectoryService;
+import nl.agilicy.passman.service.PasswordEntryService;
 
 @RequestMapping("api/v1/directory")
 @RestController
@@ -21,9 +24,12 @@ public class DirectoryController {
     
     private final DirectoryService directoryService;
 
+    private final PasswordEntryService passwordEntryService;
+
     @Autowired
-    public DirectoryController(DirectoryService directoryService) {
+    public DirectoryController(DirectoryService directoryService, PasswordEntryService passwordEntryService) {
         this.directoryService = directoryService;
+        this.passwordEntryService = passwordEntryService;
     }
 
     @PostMapping
@@ -49,6 +55,16 @@ public class DirectoryController {
     @DeleteMapping(path = "{id}")
     public void deleteDirectory(@PathVariable("id") Long id) {
         this.directoryService.deleteDirectory(id);
+    }
+
+    @PostMapping(path = "{id}/password-entry")
+    public void createPasswordEntry(@RequestBody PasswordEntry passwordEntry, @PathVariable("id") Long id) {
+        this.passwordEntryService.createPasswordEntry(passwordEntry, id);
+    }
+
+    @GetMapping(path = "{id}/password-entry")
+    public Set<PasswordEntry> getPasswordEntries(@PathVariable("id") Long id) {
+        return this.passwordEntryService.getPasswordEntries(id);
     }
 
 }
