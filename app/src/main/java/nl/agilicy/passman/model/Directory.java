@@ -3,15 +3,28 @@ package nl.agilicy.passman.model;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 public class Directory {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false)
     private String name;
 
-    private boolean is_active;
+    private boolean is_active = true;
 
+    @CreationTimestamp
     private Timestamp created_at;
 
+    @UpdateTimestamp
     private Timestamp update_at;
 
     public UUID getId() {
