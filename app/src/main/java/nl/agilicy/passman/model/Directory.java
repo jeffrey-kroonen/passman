@@ -19,7 +19,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password_entries"})
 public class Directory {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
