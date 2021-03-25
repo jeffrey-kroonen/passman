@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/base :: header"></head>
+<body>
+    <div class="container mt-5">
+        <div class="card-body shadow-sm">
+            <p>
+                <strong>Naam: </strong>
+                <span th:text="${user.getFirst_name()} + ' ' + ${user.getLast_name()}"></span>
+            </p>
+            <p>
+                <strong>E-mailadres: </strong>
+                <span th:text="${user.getEmail()}"></span>
+            </p>
+            <p>
+                <strong>Actief: </strong>
+                <span th:text="${user.isIs_active()} ? 'Ja' : 'Nee'"></span>
+            </p>
+        </div>
+    </div>
+    
+    <div th:include="fragments/base :: javscripts"></div>
+</body>

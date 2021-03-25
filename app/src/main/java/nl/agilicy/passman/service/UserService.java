@@ -5,23 +5,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import nl.agilicy.passman.dao.UserDao;
 import nl.agilicy.passman.model.User;
 import nl.agilicy.passman.repository.UserRepository;
 
 @Service
 public class UserService {
-    
-    private final UserDao userDao;
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(@Qualifier("testUserDao") UserDao userDao, UserRepository userRepository) {
-        this.userDao = userDao;
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

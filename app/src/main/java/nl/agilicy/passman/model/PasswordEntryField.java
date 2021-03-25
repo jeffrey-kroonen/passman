@@ -1,27 +1,54 @@
 package nl.agilicy.passman.model;
 
-import java.util.UUID;
+import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
 public class PasswordEntryField {
     enum DataType {
-        STRING
+        EMAIL,
+        USERNAME,
+        PASSWORD
     }
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(nullable = false)
     private DataType datatype;
-    
-    private PasswordEntry password_entry;
 
+    @Column(nullable = false)
     private String field_name;
 
-    private int value;
+    @Column(nullable = false)
+    private String value;
 
-    public UUID getId() {
+    @CreationTimestamp
+    private Timestamp created_at;
+
+    @UpdateTimestamp
+    private Timestamp updated_at;
+
+    @ManyToOne
+    @JoinColumn(name = "password_entry_id", nullable = false)
+    private PasswordEntry password_entry;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,11 +76,27 @@ public class PasswordEntryField {
         this.field_name = field_name;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 }

@@ -1,24 +1,46 @@
 package nl.agilicy.passman.model;
 
 import java.sql.Timestamp;
-import java.util.UUID;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password_entries"})
 public class Directory {
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    private boolean is_active;
+    private boolean is_active = true;
 
+    @CreationTimestamp
     private Timestamp created_at;
 
-    private Timestamp update_at;
+    @UpdateTimestamp
+    private Timestamp updated_at;
 
-    public UUID getId() {
+    @OneToMany(mappedBy = "directory")
+    private Set<PasswordEntry> password_entries;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,11 +68,19 @@ public class Directory {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdate_at() {
-        return update_at;
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdate_at(Timestamp update_at) {
-        this.update_at = update_at;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public Set<PasswordEntry> getPassword_entries() {
+        return password_entries;
+    }
+
+    public void setPassword_entries(Set<PasswordEntry> password_entries) {
+        this.password_entries = password_entries;
     }   
 }

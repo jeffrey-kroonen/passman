@@ -1,43 +1,78 @@
 package nl.agilicy.passman.service;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import nl.agilicy.passman.dao.PasswordEntryDao;
+import nl.agilicy.passman.model.Directory;
 import nl.agilicy.passman.model.PasswordEntry;
+import nl.agilicy.passman.repository.DirectoryRepository;
+import nl.agilicy.passman.repository.PasswordEntryRepository;
 
 @Service
 public class PasswordEntryService {
     
-    private final PasswordEntryDao passwordEntryDao;
+    private final PasswordEntryRepository passwordEntryRepository;
+
+    private final DirectoryRepository directoryRepository;
 
     @Autowired
-    public PasswordEntryService(@Qualifier("testPasswordEntryDao") PasswordEntryDao passwordEntryDao) {
-        this.passwordEntryDao = passwordEntryDao;
+    public PasswordEntryService(PasswordEntryRepository passwordEntryRepository, DirectoryRepository directoryRepository) {
+        this.passwordEntryRepository = passwordEntryRepository;
+        this.directoryRepository = directoryRepository;
     }
 
-    public boolean createPasswordEntry(PasswordEntry passwordEntry, UUID directoryId) {
-        return this.passwordEntryDao.createPasswordEntry(passwordEntry, directoryId);
+    public boolean createPasswordEntry(PasswordEntry passwordEntry, Long directoryId) {
+        Directory directory = this.directoryRepository.findById(directoryId).orElse(null);
+
+        if (Objects.isNull(directory)) {
+            return false;
+        }
+
+        passwordEntry.setDirectory(directory);
+
+        this.passwordEntryRepository.save(passwordEntry);
+        return true;
     }
 
-    public List<PasswordEntry> getPasswordEntries(UUID directoryId) {
-        return this.passwordEntryDao.getPasswordEntries(directoryId);
+    public Set<PasswordEntry> getPasswordEntries(Long directoryId) {
+        Directory directory = this.directoryRepository.findById(directoryId).orElse(null);
+
+        if (Objects.isNull(directory)) {
+            return null;
+        }
+
+        return directory.getPassword_entries();
     }
 
-    public Optional<PasswordEntry> getPasswordEntryById(UUID id, UUID directoryId) {
-        return this.passwordEntryDao.getPasswordEntryById(id, directoryId);
+    public Optional<PasswordEntry> getPasswordEntryById(Long id) {
+        return this.passwordEntryRepository.findById(id);
     }
 
-    public boolean updatePasswordEntry(UUID id, PasswordEntry passwordEntry, UUID directoryId) {
-        return this.passwordEntryDao.updatePasswordEntry(id, passwordEntry, directoryId);
+    public boolean updatePasswordEntry(Long id, PasswordEntry passwordEntryToUpdate) {
+        PasswordEntry passwordEntry = this.passwordEntryRepository.findById(id).orElse(null);
+
+        if (Objects.isNull(passwordEntry)) {
+            return false;
+        }
+
+        passwordEntry.setTitle(passwordEntryToUpdate.getTitle());
+
+        this.passwordEntryRepository.save(passwordEntry);
+        return true;
     }
 
-    public boolean deletePasswordEntry(UUID id, UUID directoryId) {
-        return this.passwordEntryDao.deletePasswordEntry(id, directoryId);
+    public boolean deletePasswordEntry(Long id) {
+        PasswordEntry passwordEntry = this.passwordEntryRepository.findById(id).orElse(null);
+
+        if (Objects.isNull(passwordEntry)) {
+            return false;
+        }
+
+        this.passwordEntryRepository.delete(passwordEntry);
+        return true;
     }
 }

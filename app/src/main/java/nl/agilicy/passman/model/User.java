@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,7 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -103,8 +102,8 @@ public class User {
         return last_login_at;
     }
 
-    public void setLast_login_at(Timestamp last_login_at) {
-        this.last_login_at = last_login_at;
+    public void setLast_login_at() {
+        this.last_login_at = new Timestamp(System.currentTimeMillis());
     }
 
     public Timestamp getCreated_at() {
