@@ -10,10 +10,10 @@
                 <h1 class="h3">Passman Login</h1>
 
                 <div class="p-4 shadow bg-light">
-                    <form action="" method="post">
+                    <form th:action="@{/login}" method="post">
                         <div class="mb-3">
                             <label for="email">E-mailadres</label>
-                            <input type="email" name="email" id="email" class="form-control" required>
+                            <input type="email" name="username" id="email" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="password">Wachtwoord</label>
@@ -24,7 +24,8 @@
                     </form>
                 </div>
 
-            </div>
+                <div class="alert alert-danger mt-3" th:if="${error != null}" th:text="${error}"></div>
+                <div class="alert alert-info mt-3" th:if="${message != null}" th:text="${message}"></div>
         </div>
     </div>
     
