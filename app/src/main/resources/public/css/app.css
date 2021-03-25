@@ -1,0 +1,14 @@
+body {
+    background: #f2f2f2;
+}
+.nav-list-dropdown {
+    margin-left: 40px;
+}
+
+.nav-list-dropdown a {
+    text-decoration: none;
+}
+
+.nav-list-dropdown a:hover {
+    color: #ff5555 !important;
+}

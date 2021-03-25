@@ -23,4 +23,5 @@ public class UserViewController {
 
         return "user/login";
     }
+
 }
