@@ -102,8 +102,8 @@ public class User {
         return last_login_at;
     }
 
-    public void setLast_login_at(Timestamp last_login_at) {
-        this.last_login_at = last_login_at;
+    public void setLast_login_at() {
+        this.last_login_at = new Timestamp(System.currentTimeMillis());
     }
 
     public Timestamp getCreated_at() {

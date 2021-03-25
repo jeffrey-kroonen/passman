@@ -22,6 +22,16 @@ public class AppUserDetailsService implements UserDetailsService {
         Optional<User> user = this.userRepository.findByEmail(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
+        User u1 = user.get();
+
+        if (!u1.isIs_verified()) { 
+            throw new UsernameNotFoundException("Not found: " + username);
+        }
+         
+
+        u1.setLast_login_at();
+        this.userRepository.save(u1);
+
         return user.map(AppUserDetails::new).get();
     }
     
