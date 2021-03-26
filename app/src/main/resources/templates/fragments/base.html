@@ -24,13 +24,13 @@
               <li>
                 <a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#dir-collapse" aria-expanded="true">
                     <i class="fas fa-folder-open"></i>
-                  Clients
+                  Directories
                 </a>
                 <div class="collapse show" id="dir-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
-                      <li><a href="#" class="text-white rounded">Overview</a></li>
-                      <li><a href="#" class="text-white rounded">Updates</a></li>
-                      <li><a href="#" class="text-white rounded">Reports</a></li>
+                      <li th:each="directory: ${directories}" th:if="${directory.getId() != null}">
+                        <a th:href="@{|directory/${directory.getId()}|}" class="text-white rounded" th:text="${directory.getName()}"></a>
+                      </li>
                     </ul>
                   </div>
               </li>

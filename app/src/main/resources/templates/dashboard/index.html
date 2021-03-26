@@ -5,6 +5,16 @@
 
     <div th:include="fragments/base :: sidebar"></div>
     
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card-body shadow-sm">
+                <h3 class="h3">Directories</h3>
+                <p th:text="${directories.size()}">
+
+                </p>
+            </div>
+        </div>
+    </div>
     
     <div th:include="fragments/base :: javscripts"></div>
 </body>
