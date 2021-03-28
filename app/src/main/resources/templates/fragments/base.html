@@ -16,20 +16,27 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link" th:classappend="${navActive == 'dashboard' ? 'active' : 'text-white'}">
+                <a th:href="@{/}" class="nav-link" th:classappend="${navActive == 'dashboard' ? 'active' : 'text-white'}">
                     <i class="fas fa-tachometer-alt"></i>
                   Dashboard
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white" data-bs-toggle="collapse" data-bs-target="#dir-collapse" aria-expanded="true">
-                    <i class="fas fa-folder-open"></i>
-                  Directories
+                <a href="#" class="nav-link" th:classappend="${navActive == 'directory' ? 'active' : 'text-white'}" data-bs-toggle-DISABLED="collapse" data-bs-target-DISABLED="#dir-collapse" aria-expanded="true">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <i class="fas fa-folder-open"></i>
+                        Directories
+                      </div>
+                      <div>
+                        <i class="fas fa-plus" data-bs-toggle="modal" data-bs-target="#addDirectoryModal"></i>
+                      </div>
+                    </div>
                 </a>
                 <div class="collapse show" id="dir-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
                       <li th:each="directory: ${directories}" th:if="${directory.getId() != null}">
-                        <a th:href="@{|directory/${directory.getId()}|}" class="text-white rounded" th:text="${directory.getName()}"></a>
+                        <a th:href="@{|/directory/${directory.getId()}|}" class="text-white rounded" th:text="${directory.getName()}"></a>
                       </li>
                     </ul>
                   </div>
@@ -55,11 +62,39 @@
               </ul>
             </div>
           </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="addDirectoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addDirectoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Directory toevoegen</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/directory}" th:object="${newDirectory}" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="newNameInput" class="form-label">Naam</label>
+                            <input type="text" name="" id="newNameInput" class="form-control" th:field="*{name}" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Sluiten</button>
+                      <button type="submit" class="btn btn-primary btn-sm">Toevoegen</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
       </div>
 
     </div>
 
     <div th:fragment="javscripts">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/9a68d31783.js" crossorigin="anonymous"></script>
+        <script th:src="@{/js/app.js}"></script>
     </div>
