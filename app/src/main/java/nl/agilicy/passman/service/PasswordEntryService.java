@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import nl.agilicy.passman.model.Directory;
 import nl.agilicy.passman.model.PasswordEntry;
+import nl.agilicy.passman.model.PasswordEntryField;
 import nl.agilicy.passman.repository.DirectoryRepository;
 import nl.agilicy.passman.repository.PasswordEntryRepository;
 
@@ -21,11 +22,14 @@ public class PasswordEntryService {
     
     private final PasswordEntryRepository passwordEntryRepository;
 
+    private final PasswordEntryFieldService passwordEntryFieldService;
+
     private final DirectoryRepository directoryRepository;
 
     @Autowired
-    public PasswordEntryService(PasswordEntryRepository passwordEntryRepository, DirectoryRepository directoryRepository) {
+    public PasswordEntryService(PasswordEntryRepository passwordEntryRepository, PasswordEntryFieldService passwordEntryFieldService, DirectoryRepository directoryRepository) {
         this.passwordEntryRepository = passwordEntryRepository;
+        this.passwordEntryFieldService = passwordEntryFieldService;
         this.directoryRepository = directoryRepository;
     }
 
@@ -52,6 +56,10 @@ public class PasswordEntryService {
         return directory.getPassword_entries();
     }
 
+    public PasswordEntry getLast() {
+        return this.passwordEntryRepository.findTopByOrderByIdDesc();
+    }
+
     public Optional<PasswordEntry> getPasswordEntryById(Long id) {
         return this.passwordEntryRepository.findById(id);
     }
@@ -74,6 +82,14 @@ public class PasswordEntryService {
 
         if (Objects.isNull(passwordEntry)) {
             return false;
+        }
+
+        Set<PasswordEntryField> passwordEntryFields = this.passwordEntryFieldService.getPasswordEntryFields(id);
+
+        Iterator<PasswordEntryField> itr = passwordEntryFields.iterator();
+
+        while(itr.hasNext()){
+            this.passwordEntryFieldService.deletePasswordEntryField(itr.next().getId());
         }
 
         this.passwordEntryRepository.delete(passwordEntry);

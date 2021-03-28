@@ -1,5 +1,6 @@
 package nl.agilicy.passman.service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import nl.agilicy.passman.exception.http.BadRequestException;
 import nl.agilicy.passman.model.PasswordEntry;
 import nl.agilicy.passman.model.PasswordEntryField;
 import nl.agilicy.passman.repository.PasswordEntryFieldRepository;
@@ -35,6 +37,23 @@ public class PasswordEntryFieldService {
         passwordEntryField.setPassword_entry(passwordEntry);
 
         this.passwordEntryFieldRepository.save(passwordEntryField);
+        return true;
+    }
+
+    public boolean createPasswordEntryFieldsByPasswordEntryId(PasswordEntry passwordEntry, List<String> passwordEntryValues, List<String> passwordEntryFields, List<String> passwordEntryTypes) throws BadRequestException{
+        if (passwordEntryFields.size() != passwordEntryTypes.size()) {
+            throw new BadRequestException();
+        }
+
+        for (int i = 0; i < passwordEntryFields.size(); i++) {
+            PasswordEntryField pwef = new PasswordEntryField();
+            pwef.setValue(passwordEntryValues.get(i));
+            pwef.setField_name(passwordEntryFields.get(i));
+            pwef.setDatatype(PasswordEntryField.getDataTypeByValue(passwordEntryTypes.get(i)));
+            pwef.setPassword_entry(passwordEntry);
+            this.passwordEntryFieldRepository.save(pwef);
+        }
+
         return true;
     }
 

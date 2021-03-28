@@ -54,7 +54,6 @@ public class DirectoryViewController {
         model.addAttribute("newPasswordEntry", new PasswordEntry());
 
         return "directory/show";
-
     }
 
     @PostMapping("/directory")
