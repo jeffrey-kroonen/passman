@@ -27,7 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .anyRequest().authenticated()
+            // Comment line beneight to access app without authorisation.
+            // .anyRequest().authenticated()
             .and()
             .formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error").permitAll()
             .and()

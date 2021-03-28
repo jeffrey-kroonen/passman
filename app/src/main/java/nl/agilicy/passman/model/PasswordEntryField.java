@@ -16,8 +16,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 public class PasswordEntryField {
     enum DataType {
-        EMAIL,
-        USERNAME,
+        TEXT,
         PASSWORD
     }
 
@@ -99,4 +98,8 @@ public class PasswordEntryField {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+    public static final DataType getDataTypeByValue(String s) {
+        return DataType.valueOf(s);
+    } 
 }

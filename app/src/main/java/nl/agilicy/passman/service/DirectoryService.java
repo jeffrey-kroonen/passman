@@ -24,6 +24,10 @@ public class DirectoryService {
         this.directoryRepository.save(directory);
     }
 
+    public Directory getLast() {
+        return this.directoryRepository.findTopByOrderByIdDesc();
+    }
+
     public List<Directory> getDirectories() {
         return this.directoryRepository.findAll();
     }
