@@ -7,18 +7,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import nl.agilicy.passman.model.Directory;
+import nl.agilicy.passman.model.User;
 import nl.agilicy.passman.service.DirectoryService;
+import nl.agilicy.passman.service.UserService;
 
 @Controller
 public class DashboardViewController {
 
     private final DirectoryService directoryService;
 
+    private final UserService userService;
+
     private List<Directory> directories;
 
-    public DashboardViewController(DirectoryService directoryService) {
+    private List<User> users;
+
+    public DashboardViewController(DirectoryService directoryService, UserService userService) {
         this.directoryService = directoryService;
         this.directories = this.directoryService.getDirectories();
+
+        this.userService = userService;
+        this.users = this.userService.getUsers();
     }
 
     @GetMapping("/")
@@ -26,6 +35,7 @@ public class DashboardViewController {
         model.addAttribute("headTitle", "dashboard");
         model.addAttribute("navActive", "dashboard");
         model.addAttribute("directories", this.directories);
+        model.addAttribute("users", this.users);
 
         return "dashboard/index";
     }

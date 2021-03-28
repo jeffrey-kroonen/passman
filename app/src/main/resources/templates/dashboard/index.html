@@ -3,16 +3,30 @@
 <head th:include="fragments/base :: header"></head>
 <body>
 
-    <div th:include="fragments/base :: sidebar"></div>
-    
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card-body shadow-sm">
-                <h3 class="h3">Directories</h3>
-                <p th:text="${directories.size()}">
+    <div class="wrapper">
 
-                </p>
+        <div th:include="fragments/base :: sidebar"></div>
+
+        <div id="content">
+
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card-body shadow-sm">
+                            <h5 class="h5">Aantal directories</h5>
+                            <p th:text="${directories.size()}"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card-body shadow-sm">
+                            <h5 class="h5">Aantal users</h5>
+                            <p th:text="${users.size()}"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
     
