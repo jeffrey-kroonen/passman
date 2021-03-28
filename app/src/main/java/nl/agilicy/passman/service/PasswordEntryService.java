@@ -1,5 +1,9 @@
 package nl.agilicy.passman.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -74,5 +78,24 @@ public class PasswordEntryService {
 
         this.passwordEntryRepository.delete(passwordEntry);
         return true;
+    }
+
+    public List<Set<PasswordEntry>> getPasswordEntriesForViewDirectory(Long directoryId) {
+        Set<PasswordEntry> passwordEntries = this.getPasswordEntries(directoryId);
+
+        List<Set<PasswordEntry>> passwordEntriesForView = new ArrayList<>();
+        
+        Iterator<PasswordEntry> itr = passwordEntries.iterator();
+
+        while (itr.hasNext()) {
+            Set<PasswordEntry> tmpSet = new HashSet<PasswordEntry>();
+
+            for (int j = 0; j < 3 && itr.hasNext(); j++) {
+                tmpSet.add(itr.next());
+            }
+            passwordEntriesForView.add(tmpSet);
+        }
+
+        return passwordEntriesForView;
     }
 }

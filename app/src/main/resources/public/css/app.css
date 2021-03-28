@@ -29,3 +29,8 @@ body {
 .nav-list-dropdown a:hover {
     color: #ff5555 !important;
 }
+
+.password-entry-card-text:hover {
+    cursor: pointer;
+    color: #ff5555;
+}

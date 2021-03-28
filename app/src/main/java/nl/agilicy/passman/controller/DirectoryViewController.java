@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import nl.agilicy.passman.exception.http.BadRequestException;
 import nl.agilicy.passman.exception.http.NotFoundException;
 import nl.agilicy.passman.model.Directory;
+import nl.agilicy.passman.model.PasswordEntry;
 import nl.agilicy.passman.model.User;
 import nl.agilicy.passman.service.DirectoryService;
+import nl.agilicy.passman.service.PasswordEntryService;
 import nl.agilicy.passman.service.UserService;
 
 @Controller
@@ -24,11 +26,13 @@ public class DirectoryViewController {
 
     private final DirectoryService directoryService;
 
+    private final PasswordEntryService passwordEntryService;
+
     private final UserService userService;
 
-
-    public DirectoryViewController(DirectoryService directoryService, UserService userService) {
+    public DirectoryViewController(DirectoryService directoryService, PasswordEntryService passwordEntryService, UserService userService) {
         this.directoryService = directoryService;
+        this.passwordEntryService = passwordEntryService;
         this.userService = userService;
     }
     
@@ -46,6 +50,8 @@ public class DirectoryViewController {
         model.addAttribute("directories", this.directoryService.getDirectories());
         model.addAttribute("newDirectory", new Directory());
         model.addAttribute("directory", directory);
+        model.addAttribute("passwordEntries", this.passwordEntryService.getPasswordEntriesForViewDirectory(id));
+        model.addAttribute("newPasswordEntry", new PasswordEntry());
 
         return "directory/show";
 

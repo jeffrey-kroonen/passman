@@ -38,13 +38,87 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-sm">Bijwerken</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Opslaan</button>
                             </form>
                         </div>
                     </div>
 
                 </div>
+
+                <div class="row mt-5">
+
+                    <div class="col-sm-8 mx-auto">
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="h5">Password entries</h5>
+
+                            <button class="btn btn-outline-primary btn-sm" th:disabled="!${directory.isIs_active()}" data-bs-toggle="modal" data-bs-target="#addPasswordEntryModal"><i class="fas fa-plus"></i></button>
+                        </div>
+
+                        <div class="row mb-4" th:each="passwordEntryList: ${passwordEntries}" th:if="${!passwordEntryList.isEmpty()}">
+                            <div class="col-sm-4" th:each="passwordEntry: ${passwordEntryList}" th:if="${passwordEntry}">
+                                
+                                <div class="card-body shadow-sm" th:classappend="${directory.isIs_active()} ? 'bg-white password-entry-card-text' : 'bg-light text-muted'">
+                                    <div class="d-flex justify-content-between align-items-center">
+            
+                                        <div th:text="${passwordEntry.getTitle()}"></div>
+
+                                        <form th:action="@{|/directory/${directory.getId()}|}" method="post">
+                                            <input type="hidden" name="_method" value="delete">
+                                            <button class="btn btn-outline-danger btn-sm" th:disabled="!${directory.isIs_active()}"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
+             <!-- Modal - Add password entry -->
+          <div class="modal fade" id="addPasswordEntryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addPasswordEntryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addPasswordEntryModalLabel">Password entry toevoegen</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/password-entry}" th:object="${newPasswordEntry}" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="newNameInput" class="form-label">Titel</label>
+                            <input type="text" id="newTitleInput" class="form-control" th:field="*{title}" required>
+                            <hr>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="">Veldnaam</label>
+                                <input type="text" id="" name="passwordEntryFields[]" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Veldtype</label>
+                                <select class="form-select" name="passwordEntryTypesp[]" id="">
+                                    <option value="EMAIL">Email</option>
+                                    <option value="USERNAME">Gebruikersnaam</option>
+                                    <option value="PASSWORD">Wachtwoord</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Sluiten</button>
+                      <button type="submit" class="btn btn-primary btn-sm">Toevoegen</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
         </div>
     </div>
