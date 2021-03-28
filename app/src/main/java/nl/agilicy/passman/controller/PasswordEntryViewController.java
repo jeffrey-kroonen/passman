@@ -3,6 +3,7 @@ package nl.agilicy.passman.controller;
 import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import nl.agilicy.passman.exception.http.BadRequestException;
 import nl.agilicy.passman.form.models.DeletePasswordEntryForm;
@@ -12,6 +13,7 @@ import nl.agilicy.passman.service.PasswordEntryFieldService;
 import nl.agilicy.passman.service.PasswordEntryService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,4 +58,16 @@ public class PasswordEntryViewController {
         return "redirect:/directory/" + deletePasswordEntryForm.getDirectoryId();
     }
 
+    @GetMapping("/password-entry-show/{id}")
+    public String showModalPasswordEntry(@PathVariable("id") Long id, Model model) {
+        PasswordEntry passwordEntry = this.passwordEntryService.getPasswordEntryById(id).orElse(null);
+
+        if (Objects.isNull(passwordEntry)) {
+            throw new BadRequestException();
+        }
+
+        model.addAttribute("passwordEntry", passwordEntry);
+
+        return "password-entry/modal";
+    }
 }
