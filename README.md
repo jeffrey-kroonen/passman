@@ -2,11 +2,11 @@
 An application to manage passwords.
 
 
+
 ## Todo
-1. Add repository for Directory entity.
-2. Refactor Directory model.
-3. Refactor DirectoryService.
-4. Test via Postman.
+- [ ] When showing password-entries on directory, order them by date.
+- [ ] When showing an individual password-entry, order the pasword-entry-fields by date.
+- [ ] When showing an individual password-entry, select the correct datatype.
 
 # Requests
 ## Get users
