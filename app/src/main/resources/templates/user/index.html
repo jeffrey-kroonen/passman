@@ -11,31 +11,107 @@
         <div id="content">
 
             <div class="container mt-5">
-               <table class="table table-hover">
-                   <thead>
-                       <tr>
-                           <th>#</th>
-                           <th>Naam</th>
-                           <th>Email</th>
-                           <th>Actief</th>
-                           <th>Geverifieerd</th>
-                           <th>Laasts ingelogd op</th>
-                           <th>Aangemaakt op</th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <tr th:each="user: ${users}">
-                           <td th:text="${user.getId()}"></td>
-                           <td th:text="${user.getFirst_name() + ' ' + user.getLast_name()}"></td>
-                           <td th:text="${user.getEmail()}"></td>
-                           <td th:text="${user.isIs_active() ? 'Ja' : 'Nee'}"></td>
-                           <td th:text="${user.isIs_verified() ? 'Ja' : 'Nee'}"></td>
-                           <td th:text="${user.getLast_login_at()}"></td>
-                           <td th:text="${user.getCreated_at()}"></td>
-                       </tr>
-                   </tbody>
-               </table> 
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="h5">Gebruikers</h5>
+
+                    
+                </div>
+
+                <div class="card-body bg-white shadow-sm">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Naam</th>
+                                <th>Email</th>
+                                <th>Actief</th>
+                                <th>Geverifieerd</th>
+                                <th>Laasts ingelogd op</th>
+                                <th>Aangemaakt op</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle" th:each="user: ${users}">
+                                <td th:text="${user.getId()}"></td>
+                                <td th:text="${user.getFirst_name() + ' ' + user.getLast_name()}"></td>
+                                <td th:text="${user.getEmail()}"></td>
+                                <td th:text="${user.isIs_active() ? 'Ja' : 'Nee'}"></td>
+                                <td th:text="${user.isIs_verified() ? 'Ja' : 'Nee'}"></td>
+                                <td th:text="${user.getLast_login_at()}"></td>
+                                <td th:text="${user.getCreated_at()}"></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" th:attr="data-bs-target='#showUserEditModal' + ${user.getId()}"><i class="fas fa-pencil-alt"></i></button>
+                                </td>
+                                
+                                <!-- Modal - Show user edit form -->
+                                <div class="modal fade" th:id="'showUserEditModal' + ${user.getId()}" tabindex="-1" th:attr="aria-labelledby='showUserEditModalLabel' + ${user.getId()}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}" method="post">
+                                                <input type="hidden" name="_method" value="put">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" th:id="'showUserEditModalLabel' + ${user.getId()}" th:text="${user.getFirst_name() + ' ' + user.getLast_name()}"></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    
+                                                    <div class="row mb-3">
+                                                        <div class="col-sm-6">
+                                                            <label for="" class="form-label">Voornaam</label>
+                                                            <input type="text" name="first_name" class="form-control" th:value="${user.getFirst_name()}">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="" class="form-label">Achternaam</label>
+                                                            <input type="text" name="last_name" class="form-control" th:value="${user.getLast_name()}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Emailadres</label>
+                                                        <input type="email" name="email" class="form-control" th:value="${user.getEmail()}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" name="is_active" th:checked="${user.isIs_active}">
+                                                            <label class="form-check-label" for="">Actief</label>
+                                                        </div>
+
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" name="is_verified" th:checked="${user.isIs_verified}">
+                                                            <label class="form-check-label" for="">Gevalideerd</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <small class="d-block"><em><strong>Aangemaak op</strong> <span th:text="${user.getCreated_at()}"></span></em></small>
+                                                    <small class="d-block"><em><strong>Laatst bijgewerkt op</strong> <span th:text="${user.getUpdated_at()}"></span></em></small>
+                                                    <small class="d-block"><em><strong>Laatst ingelogd op</strong> <span th:text="${user.getLast_login_at()}"></span></em></small>
+
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <div>
+                                                        <!-- <form th:action="@{/user/{id}(id=${user.getId()})}" method="post"> -->
+                                                            <!-- <input type="hidden" name="_method" value="delete"> -->
+                                                            <button class="btn btn-outline-danger btn-sm "><i class="fas fa-trash"></i></button>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                                                        <button type="submit" class="btn btn-primary">Opslaan</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
             </div>
+
         </div>
     </div>
     

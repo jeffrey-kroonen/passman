@@ -42,6 +42,8 @@ public class UserService {
         user.setFirst_name(userToUpdate.getFirst_name());
         user.setLast_name(userToUpdate.getLast_name());
         user.setEmail(userToUpdate.getEmail());
+        user.setIs_active(userToUpdate.isIs_active());
+        user.setIs_verified(userToUpdate.isIs_verified());
 
         this.userRepository.save(user);
         return true;
