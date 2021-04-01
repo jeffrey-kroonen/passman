@@ -53,4 +53,8 @@ public class AppUserDetails implements UserDetails {
     public boolean isEnabled() {
         return this.user.isIs_active();
     }
+
+    public User getUser() {
+        return this.user;
+    }
 }
