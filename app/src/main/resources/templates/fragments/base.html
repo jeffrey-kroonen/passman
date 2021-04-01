@@ -41,6 +41,23 @@
                     </ul>
                   </div>
               </li>
+              <li>
+                <a href="#" class="nav-link" th:classappend="${navActive == 'manage' ? 'active' : 'text-white'}" data-bs-toggle="collapse" data-bs-target="#manage-collapse" aria-expanded="false">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <i class="fas fa-sliders-h"></i>
+                        Manage
+                      </div>
+                    </div>
+                </a>
+                <div class="collapse" id="manage-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
+                      <li>
+                        <a th:href="${'#'}" class="text-white rounded" th:text="Gebruikers"></a>
+                      </li>
+                    </ul>
+                  </div>
+              </li>
 
             </ul>
             <hr>
