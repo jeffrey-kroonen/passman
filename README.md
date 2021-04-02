@@ -1,8 +1,6 @@
 # passman
 An application to manage passwords.
 
-
-
 ## Todo
 - [ ] When showing password-entries on directory, order them by date.
 - [ ] When showing an individual password-entry, order the pasword-entry-fields by date.
