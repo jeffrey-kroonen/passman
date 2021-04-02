@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import nl.agilicy.passman.exception.http.BadRequestException;
@@ -39,8 +40,19 @@ public class UserViewController {
         model.addAttribute("newDirectory", new Directory());
         model.addAttribute("directories", this.directoryService.getDirectories());
         model.addAttribute("users", this.userService.getUsers());
+        model.addAttribute("user", new User());
 
         return "user/index";
+    }
+
+    @PostMapping("/user")
+    public String createUser(@ModelAttribute User userToAdd) {
+
+        // Todo: Get user by email to check if user already exists.
+
+        this.userService.createUser(userToAdd);
+
+        return "redirect:/user";
     }
 
     @PutMapping("/user/{id}")
