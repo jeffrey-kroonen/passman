@@ -1,0 +1,36 @@
+body {
+    background: #f2f2f2;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#content {
+    width: 100%;
+}
+
+#sidebar {
+    min-width: 280px;
+    max-width: 280px;
+    height: 100vh;
+}
+
+.nav-list-dropdown {
+    margin-left: 40px;
+}
+
+.nav-list-dropdown a {
+    text-decoration: none;
+}
+
+.nav-list-dropdown a:hover {
+    color: #ff5555 !important;
+}
+
+.password-entry-card-text:hover {
+    cursor: pointer;
+    color: #ff5555;
+}
