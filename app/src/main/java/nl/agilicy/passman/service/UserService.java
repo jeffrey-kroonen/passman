@@ -32,6 +32,10 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
+    public User getlast() {
+        return this.userRepository.findTopByOrderByIdDesc();
+    }
+
     public boolean updateUser(Long id, User userToUpdate) {
         User user = this.getUserById(id).orElse(null);
 

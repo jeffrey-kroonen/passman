@@ -22,10 +22,10 @@
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link" th:classappend="${navActive == 'directory' ? 'active' : 'text-white'}" data-bs-toggle-DISABLED="collapse" data-bs-target-DISABLED="#dir-collapse" aria-expanded="true">
+                <a href="#" class="nav-link" th:classappend="${navActive == 'directory' ? 'active' : 'text-white'}" data-bs-toggle="collapse" data-bs-target="#dir-collapse" aria-expanded="true">
                     <div class="d-flex justify-content-between">
                       <div>
-                        <i class="fas fa-folder-open"></i>
+                        <i class="fas fa-folder-open-h"></i>
                         Directories
                       </div>
                       <div>
@@ -33,10 +33,13 @@
                       </div>
                     </div>
                 </a>
-                <div class="collapse show" id="dir-collapse">
+                <div class="collapse" th:classappend="${navActive == 'directory' ? 'show' : ''}" id="dir-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
                       <li th:each="directory: ${directories}" th:if="${directory.getId() != null}">
-                        <a th:href="@{|/directory/${directory.getId()}|}" class="text-white rounded" th:text="${directory.getName()}"></a>
+                        <a th:href="@{|/directory/${directory.getId()}|}" class="text-white rounded">
+                            <i class="fas fa-angle-right"></i>&nbsp;
+                            <span th:text="${directory.getName()}"></span>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -50,10 +53,13 @@
                       </div>
                     </div>
                 </a>
-                <div class="collapse" id="manage-collapse">
+                <div class="collapse" th:classappend="${navActive == 'manage' ? 'show' : ''}" id="manage-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
                       <li>
-                        <a th:href="@{/user}" class="text-white rounded" th:text="Gebruikers"></a>
+                        <div class="d-flex justify-content-between mt-2">
+                          <a th:href="@{/user}" class="text-white rounded"><i class="fas fa-angle-right"></i> &nbsp;Gebruikers</a>
+                          <i class="fas fa-plus" data-bs-toggle="modal" data-bs-target="#addUserModal"></i>
+                        </div>
                       </li>
                     </ul>
                   </div>

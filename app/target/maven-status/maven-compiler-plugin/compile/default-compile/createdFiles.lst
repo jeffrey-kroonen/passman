@@ -1,0 +1,5 @@
+nl/agilicy/passman/model/AppUserDetails.class
+nl/agilicy/passman/security/SecurityConfiguration.class
+nl/agilicy/passman/controller/DashboardViewController.class
+nl/agilicy/passman/service/AppUserDetailsService.class
+nl/agilicy/passman/PassmanApplication.class

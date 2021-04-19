@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import nl.agilicy.passman.model.Directory;
 import nl.agilicy.passman.service.DirectoryService;
 import nl.agilicy.passman.service.UserService;
+
+import nl.agilicy.passman.model.User;
 
 @Controller
 public class UserViewController {
@@ -34,7 +38,14 @@ public class UserViewController {
 
         return "user/index";
     } 
- 
+    
+    @PostMapping("/user")
+    public String addUser(@ModelAttribute User userToAdd) {
+        this.userService.createUser(userToAdd);
+
+        return "redirect:/user/" + this.userService.getlast().getId();
+    }
+
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         model.addAttribute("headTitle", "login");
@@ -48,7 +59,6 @@ public class UserViewController {
             model.addAttribute("message", "Je bent uitgelogd.");
         }
             
-
         return "user/login";
     }
 

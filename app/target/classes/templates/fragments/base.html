@@ -53,7 +53,10 @@
                 <div class="collapse" id="manage-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-list-dropdown">
                       <li>
-                        <a th:href="@{/user}" class="text-white rounded" th:text="Gebruikers"></a>
+                        <div class="d-flex justify-content-between mt-2">
+                          <a th:href="@{/user}" class="text-white rounded" th:text="Gebruikers"></a>
+                          <i class="fas fa-plus" data-bs-toggle="modal" data-bs-target="#addUserModal"></i>
+                        </div>
                       </li>
                     </ul>
                   </div>

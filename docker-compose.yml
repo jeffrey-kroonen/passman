@@ -1,6 +1,7 @@
 version: '3.9'
 services: 
     app:
+        container_name: passman-app
         build: app
         ports: 
             - 8080:8080
@@ -10,10 +11,11 @@ services:
         depends_on: 
             - db
     db:
+        container_name: passman-db
         image: mysql:5.7
         restart: always
         volumes: 
-            - ./db/db-data:/var/lib/mysl
+            - ./db/db-data:/var/lib/mysql
         networks: 
             - passman
         env_file: ./db/.env.dev

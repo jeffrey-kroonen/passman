@@ -9,4 +9,6 @@ import nl.agilicy.passman.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     
     public Optional<User> findByEmail(String username);
+
+    public User findTopByOrderByIdDesc();
 }
