@@ -1,25 +1,25 @@
 version: '3.9'
-
-services:
-
-  mysql:
-    image: mysql
-    container_name: passman-mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      MYSQL_DATABASE: passman
-      MYSQL_USER: passman_user
-      MYSQL_PASSWORD: passman_password
-    ports:
-      - '3306:3306'
-    volumes: 
-      - ./docker/mysql/db-data:/var/lib/mysql
-
-  adminer:
-    image: adminer
-    container_name: passman-adminer
-    restart: always
-    ports:
-      - 8081:8080
+services: 
+    app:
+        container_name: passman-app
+        build: app
+        ports: 
+            - 8080:8080
+        env_file: ./db/.env.dev
+        networks: 
+            - passman
+        depends_on: 
+            - db
+    db:
+        container_name: passman-db
+        image: mysql:5.7
+        restart: always
+        volumes: 
+            - ./db/db-data:/var/lib/mysql
+        networks: 
+            - passman
+        env_file: ./db/.env.dev
+        environment: 
+            MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+networks: 
+    passman:

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="fragments/base :: header"></head>
+<body>
+
+    <div class="wrapper">
+
+        <div th:include="fragments/base :: sidebar"></div>
+
+        <div id="content">
+
+            <div class="container mt-5">
+               <table class="table table-hover">
+                   <thead>
+                       <tr>
+                           <th>#</th>
+                           <th>Naam</th>
+                           <th>Email</th>
+                           <th>Actief</th>
+                           <th>Geverifieerd</th>
+                           <th>Laasts ingelogd op</th>
+                           <th>Aangemaakt op</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr th:each="user: ${users}">
+                           <td th:text="${user.getId()}"></td>
+                           <td th:text="${user.getFirst_name() + ' ' + user.getLast_name()}"></td>
+                           <td th:text="${user.getEmail()}"></td>
+                           <td th:text="${user.isIs_active() ? 'Ja' : 'Nee'}"></td>
+                           <td th:text="${user.isIs_verified() ? 'Ja' : 'Nee'}"></td>
+                           <td th:text="${user.getLast_login_at()}"></td>
+                           <td th:text="${user.getCreated_at()}"></td>
+                       </tr>
+                   </tbody>
+               </table> 
+            </div>
+        </div>
+    </div>
+    
+    <div th:include="fragments/base :: javscripts"></div>
+</body>
+</html>

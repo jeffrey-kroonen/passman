@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +20,8 @@ import nl.agilicy.passman.model.Directory;
 import nl.agilicy.passman.model.User;
 import nl.agilicy.passman.service.DirectoryService;
 import nl.agilicy.passman.service.UserService;
+
+import nl.agilicy.passman.model.User;
 
 @Controller
 public class UserViewController {
@@ -43,6 +48,13 @@ public class UserViewController {
         model.addAttribute("user", new User());
 
         return "user/index";
+    } 
+    
+    @PostMapping("/user")
+    public String addUser(@ModelAttribute User userToAdd) {
+        this.userService.createUser(userToAdd);
+
+        return "redirect:/user/" + this.userService.getlast().getId();
     }
 
     @PostMapping("/user")
@@ -94,7 +106,6 @@ public class UserViewController {
             model.addAttribute("message", "Je bent uitgelogd.");
         }
             
-
         return "user/login";
     }
 

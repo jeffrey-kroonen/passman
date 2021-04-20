@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    
+     
     /**
      * Show password entry on card click.
      */
@@ -53,4 +53,5 @@ $(document).ready(() => {
             $(`#delete-user-form-${id}`).submit();
         }
     });
+  
 });

@@ -1,0 +1,81 @@
+# Created at 2021-04-09T05:52:06.010
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+# Created at 2021-04-09T05:52:06.168
+Unexpected IOException with stream: 2021-04-09 05:52:06.167  INFO 2425 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 4 JPA repository interfaces.
+
+
+# Created at 2021-04-09T05:52:06.789
+Unexpected IOException with stream: 2021-04-09 05:52:06.787  INFO 2425 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+
+# Created at 2021-04-09T05:52:06.830
+Unexpected IOException with stream: 2021-04-09 05:52:06.830  INFO 2425 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+
+
+# Created at 2021-04-09T05:52:06.960
+Unexpected IOException with stream: 2021-04-09 05:52:06.959  INFO 2425 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+
+
+# Created at 2021-04-09T05:52:07.074
+Unexpected IOException with stream: 2021-04-09 05:52:07.073  INFO 2425 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+
+
+# Created at 2021-04-09T05:52:07.316
+Unexpected IOException with stream: 2021-04-09 05:52:07.315  INFO 2425 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+
+# Created at 2021-04-09T05:52:07.338
+Unexpected IOException with stream: 2021-04-09 05:52:07.337  INFO 2425 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+
+
+# Created at 2021-04-09T05:52:07.949
+Unexpected IOException with stream: 2021-04-09 05:52:07.948  INFO 2425 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+
+
+# Created at 2021-04-09T05:52:07.959
+Unexpected IOException with stream: 2021-04-09 05:52:07.958  INFO 2425 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2021-04-09T05:52:08.546
+Unexpected IOException with stream: 2021-04-09 05:52:08.546  WARN 2425 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+
+# Created at 2021-04-09T05:52:08.779
+Unexpected IOException with stream: 2021-04-09 05:52:08.778  INFO 2425 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25c16cf7, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ac0d49, org.springframework.security.web.header.HeaderWriterFilter@1317ac2c, org.springframework.security.web.csrf.CsrfFilter@8ee1404, org.springframework.security.web.authentication.logout.LogoutFilter@dcdb883, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@f575d2b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f7557fe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51566ce0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53dbe7b2, org.springframework.security.web.session.SessionManagementFilter@60fe75f7, org.springframework.security.web.access.ExceptionTranslationFilter@426913c4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@544e6b]
+
+
+# Created at 2021-04-09T05:52:09.143
+Unexpected IOException with stream: 2021-04-09 05:52:09.142  INFO 2425 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+
+
+# Created at 2021-04-09T05:52:09.590
+Unexpected IOException with stream: 2021-04-09 05:52:09.589  INFO 2425 --- [           main] n.a.passman.PassmanApplicationTests      : Started PassmanApplicationTests in 4.444 seconds (JVM running for 5.374)
+
+
+# Created at 2021-04-09T05:52:09.595
+Unexpected IOException with stream: 2021-04-09 05:52:09.594  INFO 2425 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+
+
+# Created at 2021-04-09T05:52:09.600
+Unexpected IOException with stream: 2021-04-09 05:52:09.600  INFO 2425 --- [extShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2021-04-09T05:52:09.605
+Unexpected IOException with stream: 2021-04-09 05:52:09.604  INFO 2425 --- [extShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+
+
+# Created at 2021-04-09T05:52:09.634
+Unexpected IOException with stream: 2021-04-09 05:52:09.634  INFO 2425 --- [extShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+
+# Created at 2021-04-09T05:52:09.635
+Unexpected IOException: 5,1,nl.agilicy.passman.PassmanApplicationTests,contextLoads,null,null,null
+
+

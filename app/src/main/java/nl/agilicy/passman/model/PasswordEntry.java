@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -39,6 +40,7 @@ public class PasswordEntry {
     private Directory directory;
 
     @OneToMany(mappedBy = "password_entry")
+    @OrderBy("created_at ASC")
     private Set<PasswordEntryField> password_entity_fields;
 
     public Long getId() {

@@ -3,6 +3,7 @@ package nl.agilicy.passman.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -104,7 +105,8 @@ public class PasswordEntryService {
         Iterator<PasswordEntry> itr = passwordEntries.iterator();
 
         while (itr.hasNext()) {
-            Set<PasswordEntry> tmpSet = new HashSet<PasswordEntry>();
+
+            Set<PasswordEntry> tmpSet = new LinkedHashSet<PasswordEntry>();
 
             for (int j = 0; j < 3 && itr.hasNext(); j++) {
                 tmpSet.add(itr.next());

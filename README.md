@@ -2,11 +2,11 @@
 An application to manage passwords.
 
 ## Todo
-- [ ] When showing password-entries on directory, order them by date.
-- [ ] When showing an individual password-entry, order the pasword-entry-fields by date.
-- [ ] When showing an individual password-entry, select the correct datatype.
+- [x] When showing password-entries on directory, order them by date.
+- [x] When showing an individual password-entry, order the pasword-entry-fields by date.
+- [x] When showing an individual password-entry, select the correct datatype.
 
-# Requests
+# API Reference
 ## Get users
 `GET` http://localhost:8080/api/v1/user<br>
 ### Headers<br>

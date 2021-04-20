@@ -28,10 +28,10 @@
                             <input type="text" id="" name="showPasswordEntryValues[]" th:value="${passwordEntryField.getValue()}" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <label for="">Veldtype</label>
+                            <label for="" th:text="${passwordEntryField.getDatatype()}">Veldtype</label>
                             <select class="form-select" name="passwordEntryTypes[]" id="" required>
-                                <option value="TEXT" th:selected="${passwordEntryField.getDatatype() == TEXT}">Tekst</option>
-                                <option value="PASSWORD" th:selected="${passwordEntryField.getDatatype() == PASSWORD}">Wachtwoord</option>
+                                <option value="TEXT" th:selected="${passwordEntryField.getDatatype() == T(nl.agilicy.passman.model.PasswordEntryField.DataType).TEXT}">Tekst</option>
+                                <option value="PASSWORD" th:selected="${passwordEntryField.getDatatype() == T(nl.agilicy.passman.model.PasswordEntryField.DataType).PASSWORD}">Wachtwoord</option>
                             </select>
                         </div>
                     </div>

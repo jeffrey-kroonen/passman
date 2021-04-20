@@ -1,6 +1,5 @@
 package nl.agilicy.passman.controller;
 
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import nl.agilicy.passman.exception.http.BadRequestException;
 import nl.agilicy.passman.exception.http.NotFoundException;
 import nl.agilicy.passman.model.Directory;
 import nl.agilicy.passman.model.PasswordEntry;
-import nl.agilicy.passman.model.User;
 import nl.agilicy.passman.service.DirectoryService;
 import nl.agilicy.passman.service.PasswordEntryService;
 import nl.agilicy.passman.service.UserService;
@@ -28,12 +26,9 @@ public class DirectoryViewController {
 
     private final PasswordEntryService passwordEntryService;
 
-    private final UserService userService;
-
     public DirectoryViewController(DirectoryService directoryService, PasswordEntryService passwordEntryService, UserService userService) {
         this.directoryService = directoryService;
         this.passwordEntryService = passwordEntryService;
-        this.userService = userService;
     }
     
     @GetMapping("/directory/{id}")
