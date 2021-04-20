@@ -34,3 +34,7 @@ body {
     cursor: pointer;
     color: #ff5555;
 }
+
+.c-pointer:hover {
+    cursor: pointer;
+}

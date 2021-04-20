@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    
+     
     /**
      * Show password entry on card click.
      */
