@@ -42,4 +42,16 @@ $(document).ready(() => {
 
         $('#password-entry-field-form-rows').append(htmlElm);
     });
+
+    /**
+     * Submit delete user form by pressing delete user button.
+     */
+    $(document).on('click', '.btn-delete-user', (e) => {
+        let id = $(e.currentTarget).data('id');
+
+        if (confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')) {
+            $(`#delete-user-form-${id}`).submit();
+        }
+    });
+  
 });
