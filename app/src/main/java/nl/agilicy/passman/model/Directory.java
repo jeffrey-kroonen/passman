@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -34,6 +35,7 @@ public class Directory {
     private Timestamp updated_at;
 
     @OneToMany(mappedBy = "directory")
+    @OrderBy("title ASC")
     private Set<PasswordEntry> password_entries;
 
     public Long getId() {
